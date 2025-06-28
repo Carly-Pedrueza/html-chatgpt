@@ -1,0 +1,47 @@
+
+197 / 5.000
+Banner that disappears when scrolling up.
+
+I find it very useful for user comfort and readability.
+
+Made in Elementor and added effects with CSS and HTML tags using ChatGPT
+
+<style>
+.banner-scroll {
+  position: fixed;
+  top: 80px; /* ajustá según la altura del menú */
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  opacity: 1;
+  visibility: visible;
+}
+
+.banner-scroll.oculto {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none; /* para que no moleste al hacer clic */
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const banner = document.querySelector(".banner-scroll");
+
+  window.addEventListener("scroll", function () {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop < lastScrollTop) {
+      // Scroll hacia arriba → ocultar banner
+      banner.classList.add("oculto");
+    } else {
+      // Scroll hacia abajo → mostrar banner
+      banner.classList.remove("oculto");
+    }
+
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+  });
+});
+</script>
